@@ -64,7 +64,7 @@ echo "La suma de totes les variables : " . ($X + $Y + $N + $M);
 echo "El producte de totes les variables : " . ($X * $Y * $N * $M);
 
 // b) Calculadora
-function Calculadora(int $num1, int $num2, $operacio) {
+function Calculadora(int|float $num1, int|float $num2, $operacio) {
     switch($operacio) {
         case '+':
             return $num1 + $num2;

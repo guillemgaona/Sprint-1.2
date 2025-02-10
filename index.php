@@ -64,15 +64,15 @@ echo "La suma de totes les variables : " . ($X + $Y + $N + $M);
 echo "El producte de totes les variables : " . ($X * $Y * $N * $M);
 
 // b) Calculadora
-function Calculadora($num1, $num2, $operacio) {
+function Calculadora(int $num1, int $num2, $operacio) {
     switch($operacio) {
-        case 'suma':
+        case '+':
             return $num1 + $num2;
-        case 'resta':
+        case '-':
             return $num1 - $num2;
-        case 'multiplicacio':
+        case '*':
             return $num1 * $num2;
-        case 'divisio':
+        case '/':
             if ($num2 != 0) {
                 return $num1 / $num2;
             } else {
@@ -100,12 +100,12 @@ echo "<br>Comptar fins a 20 de 2 en 2:<br>";
 comptar(20, 2);
 
 // Ex 5
-function nota($notaAlumne) {
+function nota(int $notaAlumne) {
     if ($notaAlumne>= 60) {
         $missatge = "Primera divisió";
-    } else if ($notaAlumne >=45 && $notaAlumne<60) {
+    } else if ($notaAlumne >=45) {
         $missatge = "Segona divisió";
-    } else if ($notaAlumne >=33 && $notaAlumne<45) {
+    } else if ($notaAlumne >=33) {
         $missatge = "Tercera divisió";
     } else {
         $missatge = "Reprovat";
@@ -126,7 +126,7 @@ echo nota($notaAlumne) ."<br>";
 
 // EX 6
 
-function isBitten() {
+function isBitten(): string {
     $bite = rand(1, 100);
     if ($bite <=50) {
         $message = "Charlie no t'ha mossegat";
@@ -149,7 +149,7 @@ echo isBitten() . "<br>";
 
 //Lvl 2 Ex 1
 
-function costCalls($minutes) {
+function costCalls(int $minutes) {
     $fixedCosts = 0.10;
     $costPerMinute = 0.05;
 
@@ -168,7 +168,7 @@ echo costCalls(2) . "<br>";
 
 // Ex 2
 
-function calcularTotal($quantitatXocolates, $quantitatXiclets, $quantitatCaramels) {
+function calcularTotal(int $quantitatXocolates, int $quantitatXiclets, int $quantitatCaramels) {
     $preuXocolata = 1.00;
     $preuXiclets = 0.50;
     $preuCaramels = 1.50;
@@ -188,32 +188,32 @@ echo "El total de la compra és: " . calcularTotal(2, 1, 1) . "€. <br>";
 
 // Lvl 3
 
-function sieveOfEratosthenes($n) {
+function sieveOfEratosthenes(int $n) {
     if ($n < 2) {
-        return [];
+        return "No hi ha nombres primers";
     }
 
-    $isPrime = array_fill(0, $n + 1, true);
-    $isPrime[0] = $isPrime[1] = false; // 0 i 1 no són primers
+    $result = "";
 
-    for ($i = 2; $i * $i <= $n; $i++) {
-        if ($isPrime[$i]) {
-            for ($j = $i * $i; $j <= $n; $j += $i) {
-                $isPrime[$j] = false;
+    for ($i = 2; $i <= $n; $i++) {
+        $isPrime = true;
+        for ($j = 2; $j * $j <= $i; $j++) {
+            if ($i % $j == 0) {
+                $isPrime = false;
+                break;
             }
         }
-    }
-    $primes = [];
-    for ($i = 2; $i <= $n; $i++) {
-        if ($isPrime[$i]) {
-            $primes[] = $i;
+        if ($isPrime) {
+            $result .= $i . " ";
         }
     }
 
-    return $primes;
+    return $result;
 }
 
 // Exemple 
-$nombre = 50; 
-echo "Els nombres primers fins a " . $nombre . " són: ". implode(", ", sieveOfEratosthenes($nombre));
+echo sieveOfEratosthenes(30) . "<br>";
+echo sieveOfEratosthenes(15) . "<br>";
+echo sieveOfEratosthenes(823) . "<br>";
+
 ?>
